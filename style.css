@@ -348,3 +348,30 @@ input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; background: v
 .hero-content.is-visible .cta-button.animated-child {
     transition-delay: 1.0s; /* Il pulsante parte per ultimo */
 }
+
+/* --- ANIMAZIONE LETTERE TITOLO (EFFETTO ACCATTIVANTE) --- */
+
+/* 1. La maschera: un contenitore per ogni lettera che nasconde l'overflow */
+.animate-letters .letter-mask {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 1.1; /* Previene tagli su lettere alte come 'g' o 'p' */
+}
+
+/* 2. La lettera stessa: parte spostata verso il basso */
+.animate-letters .letter {
+    display: inline-block;
+    transform: translateY(110%);
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); /* Curva di animazione fluida */
+}
+
+/* 3. L'attivazione: quando il contenitore è visibile, le lettere salgono */
+.hero-content.is-visible .animate-letters .letter {
+    transform: translateY(0%);
+}
+
+/* 4. Rimuoviamo la vecchia animazione dal paragrafo e dal pulsante per non creare conflitti */
+.hero-content p.animated-child, 
+.hero-content .cta-button.animated-child {
+    transition-delay: 0.8s; /* Diamo tempo alle lettere di animarsi prima */
+}
