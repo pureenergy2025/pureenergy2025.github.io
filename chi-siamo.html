@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi Siamo - Pure Energy</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Aggiunta per gestire il ritardo delle animazioni */
+        .animate-on-scroll {
+            transition-delay: var(--delay, 0s);
+        }
+    </style>
 </head>
 <body>
 
@@ -24,33 +30,44 @@
     </header>
 
     <main>
+        <!-- Sezione Missione con Animazioni Separate -->
         <section class="section">
-            <div class="container animate-on-scroll" style="display: flex; align-items: center; gap: 50px;">
-                <div style="flex: 1;">
+            <div class="container about-section-container">
+                <!-- Blocco Testo Animato -->
+                <div style="flex: 1;" class="animate-on-scroll">
                     <h1 style="font-size: 48px;">La Nostra Missione: Energia Pulita e Accessibile per Tutti</h1>
-                    <p>Pure Energy nasce dalla passione per l'innovazione e da una visione chiara: rendere l'indipendenza energetica una realtà concreta per famiglie e aziende. Crediamo in un futuro in cui l'energia sia prodotta in modo sostenibile, intelligente e decentralizzato. Da anni, il nostro team di esperti progetta e realizza soluzioni all'avanguardia, mettendo al centro le esigenze del cliente e il rispetto per l'ambiente.</p>
+                    <p>
+                        Pure Energy nasce dalla passione per l'innovazione e da una visione chiara: rendere l'indipendenza energetica una realtà concreta per famiglie e aziende. Crediamo in un futuro in cui l'energia sia prodotta in modo sostenibile, intelligente e decentralizzato. Da anni, il nostro team di esperti progetta e realizza soluzioni all'avanguardia, mettendo al centro le esigenze del cliente e il rispetto per l'ambiente.
+                    </p>
                 </div>
-                <div style="flex: 1;">
-                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop" alt="Team Pure Energy" style="width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <!-- Blocco Immagine Animato con un leggero ritardo -->
+                <div style="flex: 1;" class="animate-on-scroll" style="--delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop" alt="Team Pure Energy">
                 </div>
             </div>
         </section>
 
+        <!-- Sezione Valori con Animazioni Scalate -->
         <section class="section why-us-section">
-            <div class="container animate-on-scroll">
-                <h2 class="section-title">I Nostri Valori</h2>
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <h2 class="section-title">I Nostri Valori</h2>
+                </div>
                 <div class="services-grid">
-                     <div class="service-card">
+                     <!-- Card 1 con ritardo -->
+                     <div class="service-card animate-on-scroll" style="--delay: 0.2s;">
                         <div class="icon">💡</div>
                         <h3>Competenza</h3>
                         <p>Il nostro know-how tecnico è il fondamento di ogni progetto. Siamo costantemente aggiornati sulle ultime tecnologie per offrirti sempre il meglio.</p>
                     </div>
-                     <div class="service-card">
+                     <!-- Card 2 con ritardo maggiore -->
+                     <div class="service-card animate-on-scroll" style="--delay: 0.4s;">
                         <div class="icon">🤝</div>
                         <h3>Trasparenza</h3>
                         <p>Preventivi chiari, contratti semplici e un dialogo costante con il cliente. Con noi, non ci sono sorprese.</p>
                     </div>
-                     <div class="service-card">
+                     <!-- Card 3 con ritardo ancora maggiore -->
+                     <div class="service-card animate-on-scroll" style="--delay: 0.6s;">
                         <div class="icon">🌱</div>
                         <h3>Sostenibilità</h3>
                         <p>Ogni impianto che installiamo è un passo verso un pianeta più pulito. È questa la motivazione che ci guida ogni giorno.</p>
@@ -59,7 +76,7 @@
             </div>
         </section>
     </main>
-
-<script src="script.js"></script>
+    
+    <script src="script.js"></script>
 </body>
 </html>
