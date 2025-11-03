@@ -321,3 +321,30 @@ input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; background: v
     .savings-calculator { padding: 25px; }
     .slider-container { flex-direction: column; gap: 10px; align-items: stretch; }
 }
+/* --- ANIMAZIONE A CASCATA PER IL TITOLO DELLA HOME --- */
+
+/* 1. Stato iniziale: nascondi ogni "figlio" animato */
+.hero-content .animated-child {
+    opacity: 0;
+    transform: translateY(25px); /* Parte leggermente più in basso */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* 2. Stato finale: quando il contenitore è visibile, mostra i figli */
+.hero-content.is-visible .animated-child {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 3. Il segreto: ritardi diversi per creare l'effetto a cascata */
+.hero-content.is-visible h1.animated-child {
+    transition-delay: 0.2s; /* Il titolo parte per primo */
+}
+
+.hero-content.is-visible p.animated-child {
+    transition-delay: 0.6s; /* Il paragrafo parte dopo il titolo */
+}
+
+.hero-content.is-visible .cta-button.animated-child {
+    transition-delay: 1.0s; /* Il pulsante parte per ultimo */
+}
