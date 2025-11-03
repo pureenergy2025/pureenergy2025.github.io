@@ -3,7 +3,7 @@
 
 /* --- VARIABILI COLORE E IMPOSTAZIONI GLOBALI --- */
 :root {
-    --primary-color: #007BFF; /* Un blu energetico e affidabile */
+    --primary-color: #007BFF;
     --secondary-color: #0056b3;
     --dark-color: #222;
     --light-color: #f9f9f9;
@@ -31,21 +31,16 @@ h1, h2, h3 {
     font-weight: 700;
 }
 
-/* --- ANIMAZIONI RIUTILIZZABILI --- */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
+/* --- ANIMAZIONI ON-SCROLL (GESTITE DA JS) --- */
 .animate-on-scroll {
     opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* --- HEADER E NAVIGAZIONE --- */
@@ -71,6 +66,7 @@ h1, h2, h3 {
     font-weight: 700;
     color: var(--dark-color);
     text-decoration: none;
+    z-index: 10;
 }
 
 .main-nav ul {
@@ -112,6 +108,12 @@ h1, h2, h3 {
     width: 100%;
 }
 
+.hamburger-menu {
+    display: none; /* Nascosto su desktop */
+    cursor: pointer;
+    z-index: 10;
+}
+
 /* --- PULSANTI (CTA) --- */
 .cta-button {
     display: inline-block;
@@ -136,6 +138,7 @@ h1, h2, h3 {
 /* --- SEZIONI GENERICHE --- */
 .section {
     padding: 100px 0;
+    overflow-x: hidden; /* Previene barre di scorrimento orizzontali indesiderate */
 }
 
 .section-title {
@@ -154,7 +157,7 @@ h1, h2, h3 {
 /* --- HERO SECTION (HOME) --- */
 .hero {
     height: 90vh;
-    background-color: #2c3e50; /* Colore di sfondo di sicurezza */
+    background-color: #2c3e50;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/9893727/pexels-photo-9893727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
     background-size: cover;
     background-position: center;
@@ -167,7 +170,11 @@ h1, h2, h3 {
 
 .hero-content {
     max-width: 800px;
-    animation: fadeInUp 1s ease-out;
+    opacity: 0; /* Animazione gestita da JS */
+}
+
+.hero-content.is-visible {
+    animation: fadeInUp 1s ease-out forwards; /* Usa animazione a keyframe per l'eroe */
 }
 
 .hero h1 {
@@ -181,13 +188,12 @@ h1, h2, h3 {
     margin-bottom: 40px;
 }
 
-/* --- SERVICES GRID --- */
+/* --- SERVICES GRID & OTHER GRIDS --- */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
 }
-
 .service-card {
     background: #fff;
     padding: 30px;
@@ -196,206 +202,125 @@ h1, h2, h3 {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: transform 0.3s, box-shadow 0.3s;
 }
-
 .service-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
-
 .service-card .icon {
     font-size: 48px;
     color: var(--primary-color);
     margin-bottom: 20px;
 }
 
-/* --- WHY US SECTION --- */
-.why-us-section {
-    background-color: var(--light-color);
+/* --- SPECIFICO PER CHI SIAMO --- */
+.about-section-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.about-section-container img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* --- TESTIMONIALS --- */
+/* --- WHY US & TESTIMONIALS --- */
+.why-us-section { background-color: var(--light-color); }
 .testimonial-card {
     background: var(--light-color);
     padding: 30px;
     border-radius: 10px;
     border-left: 5px solid var(--primary-color);
 }
-.testimonial-card p {
-    font-style: italic;
-}
-.testimonial-card cite {
-    font-weight: bold;
-    display: block;
-    margin-top: 15px;
-}
+.testimonial-card p { font-style: italic; }
+.testimonial-card cite { font-weight: bold; display: block; margin-top: 15px; }
 
 /* --- TIMELINE (IL NOSTRO METODO) --- */
-.timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.timeline::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    background-color: var(--primary-color);
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -2px;
-    animation: growLine 2s ease-out forwards;
-}
-
-@keyframes growLine {
-    from { transform: scaleY(0); }
-    to { transform: scaleY(1); }
-}
-
-.timeline-item {
-    padding: 10px 40px;
-    position: relative;
-    width: 50%;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out forwards;
-}
-
-.timeline-item.left {
-    left: 0;
-}
-
-.timeline-item.right {
-    left: 50%;
-}
-
-.timeline-item::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    right: -10px;
-    background-color: #fff;
-    border: 4px solid var(--primary-color);
-    top: 25px;
-    border-radius: 50%;
-    z-index: 1;
-    transform: scale(0);
-    animation: popIn 0.5s ease-out forwards;
-}
-
-@keyframes popIn {
-    from { transform: scale(0); }
-    to { transform: scale(1); }
-}
-
-.timeline-item.right::after {
-    left: -10px;
-}
-
-.timeline-content {
-    padding: 20px 30px;
-    background-color: var(--light-color);
-    border-radius: 8px;
-}
+.timeline { position: relative; max-width: 800px; margin: 0 auto; }
+.timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--primary-color); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
+.timeline-item { padding: 10px 40px; position: relative; width: 50%; }
+.timeline-item.left { left: 0; }
+.timeline-item.right { left: 50%; }
+.timeline-item::after { content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background-color: #fff; border: 4px solid var(--primary-color); top: 25px; border-radius: 50%; z-index: 1; }
+.timeline-item.right::after { left: -10px; }
+.timeline-content { padding: 20px 30px; background-color: var(--light-color); border-radius: 8px; }
 
 /* --- CONTACT PAGE --- */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 50px;
-    align-items: flex-start;
-}
-
-.contact-form .form-group {
-    margin-bottom: 20px;
-}
-
-.contact-form input, .contact-form textarea, .contact-form select {
-    width: 100%;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid var(--border-color);
-    font-size: 16px;
-}
-
-.contact-info {
-    line-height: 2;
-}
-
-.contact-info iframe {
-    width: 100%;
-    height: 250px;
-    border-radius: 8px;
-    border: 0;
-}
+.contact-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 50px; align-items: flex-start; }
+.contact-form .form-group { margin-bottom: 20px; }
+.contact-form input, .contact-form textarea, .contact-form select { width: 100%; padding: 15px; border-radius: 5px; border: 1px solid var(--border-color); font-size: 16px; }
+.contact-info { line-height: 2; }
+.contact-info iframe { width: 100%; height: 250px; border-radius: 8px; border: 0; }
 
 /* --- MEDIA QUERIES PER LA RESPONSIVITÀ MOBILE --- */
 @media (max-width: 768px) {
-
-    /* --- Header e Navigazione --- */
-    .nav-container {
-        flex-direction: column; /* Impila il logo sopra la navigazione */
-        gap: 15px; /* Aggiunge spazio tra logo e menu */
+    /* --- Header e Navigazione Mobile --- */
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Parte da fuori schermo */
+        width: 70%;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.5s ease-in-out;
     }
-
+    .main-nav.nav-active {
+        right: 0; /* Entra in scena */
+    }
     .main-nav ul {
-        flex-direction: column; /* Impila le voci del menu */
-        align-items: center; /* Centra le voci del menu */
-        gap: 10px;
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
     }
-
     .main-nav li {
-        margin-left: 0; /* Rimuove il margine laterale */
+        margin-left: 0;
     }
+    .hamburger-menu {
+        display: block;
+        width: 30px;
+        height: 22px;
+        position: relative;
+    }
+    .hamburger-menu span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: var(--dark-color);
+        position: absolute;
+        left: 0;
+        transition: all 0.3s;
+    }
+    .hamburger-menu span:nth-child(1) { top: 0; }
+    .hamburger-menu span:nth-child(2) { top: 9px; }
+    .hamburger-menu span:nth-child(3) { bottom: 0; }
+    .hamburger-menu.is-active span:nth-child(1) { transform: rotate(45deg); top: 9px; }
+    .hamburger-menu.is-active span:nth-child(2) { opacity: 0; }
+    .hamburger-menu.is-active span:nth-child(3) { transform: rotate(-45deg); top: 9px; }
 
     /* --- Sezione Eroe (Home) --- */
-    .hero {
-        height: 70vh; /* Riduci l'altezza per non occupare tutto lo schermo */
-    }
-
-    .hero h1 {
-        font-size: 36px; /* Riduci la dimensione del titolo principale */
-    }
-
-    .hero p {
-        font-size: 16px; /* Riduci la dimensione del paragrafo */
-    }
+    .hero { height: 70vh; }
+    .hero h1 { font-size: 36px; }
+    .hero p { font-size: 16px; }
 
     /* --- Sezioni Generiche --- */
-    .section {
-        padding: 60px 0; /* Riduci lo spazio sopra e sotto le sezioni */
-    }
-
-    .section-title {
-        font-size: 28px; /* Riduci la dimensione dei titoli di sezione */
+    .section { padding: 60px 0; }
+    .section-title { font-size: 28px; }
+    
+    /* --- FIX IMMAGINE CHI SIAMO --- */
+    .about-section-container {
+        flex-direction: column-reverse; /* Immagine sopra, testo sotto */
     }
 
     /* --- Timeline (Il Nostro Metodo) --- */
-    .timeline::after {
-        left: 30px; /* Sposta la linea della timeline tutta a sinistra */
-    }
-
-    .timeline-item {
-        width: 100%; /* Ogni elemento della timeline occupa tutta la larghezza */
-        padding-left: 70px;
-        padding-right: 20px;
-    }
-    
-    .timeline-item.left, .timeline-item.right {
-        left: 0; /* Allinea tutti gli elementi a sinistra */
-    }
-
-    .timeline-item.right::after {
-        left: 20px; /* Allinea il pallino a sinistra, sulla linea */
-    }
-    .timeline-item.left::after {
-        left: 20px;
-    }
+    .timeline::after { left: 30px; }
+    .timeline-item { width: 100%; padding-left: 70px; padding-right: 20px; }
+    .timeline-item.left, .timeline-item.right { left: 0; }
+    .timeline-item.left::after, .timeline-item.right::after { left: 20px; }
     
     /* --- Griglia Contatti --- */
-    .contact-grid {
-        grid-template-columns: 1fr; /* Impila il form sopra le info di contatto */
-        gap: 40px;
-    }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
 }
