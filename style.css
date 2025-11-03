@@ -44,17 +44,6 @@ h1, h2, h3 {
     transform: translateY(0);
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* --- HEADER E NAVIGAZIONE --- */
 .main-header {
     background-color: #fff;
@@ -180,6 +169,9 @@ h1, h2, h3 {
     color: #fff;
 }
 
+/* === LA CORREZIONE È QUI === */
+/* Non ci sono più stili specifici di animazione per .hero-content. */
+/* Ora si affida solo alla classe generale .animate-on-scroll, risolvendo il conflitto. */
 .hero-content {
     max-width: 800px;
 }
@@ -244,31 +236,15 @@ h1, h2, h3 {
 
 /* --- TIMELINE (IL NOSTRO METODO) --- */
 .timeline { position: relative; max-width: 800px; margin: 0 auto; }
-
-.timeline.is-visible::after {
-    animation: growLine 2s ease-out forwards;
-}
-
-@keyframes growLine {
-    from { transform: scaleY(0); }
-    to { transform: scaleY(1); }
-}
-
 .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--primary-color); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
+.timeline.is-visible::after { animation: growLine 2s ease-out forwards; }
+@keyframes growLine { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 .timeline-item { padding: 10px 40px; position: relative; width: 50%; }
 .timeline-item.left { left: 0; }
 .timeline-item.right { left: 50%; }
 .timeline-item::after { content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background-color: #fff; border: 4px solid var(--primary-color); top: 25px; border-radius: 50%; z-index: 1; }
-
-.timeline-item.is-visible::after {
-    animation: popIn 0.5s ease-out forwards;
-}
-
-@keyframes popIn {
-    from { transform: scale(0); }
-    to { transform: scale(1); }
-}
-
+.timeline-item.is-visible::after { animation: popIn 0.5s ease-out forwards; }
+@keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
 .timeline-item.right::after { left: -10px; }
 .timeline-content { padding: 20px 30px; background-color: var(--light-color); border-radius: 8px; }
 
@@ -279,48 +255,40 @@ h1, h2, h3 {
 .contact-info { line-height: 2; }
 .contact-info iframe { width: 100%; height: 250px; border-radius: 8px; border: 0; }
 
+/* --- STILI PER IL CALCOLATORE DI RISPARMIO --- */
+.savings-calculator {
+    background-color: var(--light-color);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    max-width: 800px;
+    margin: 0 auto;
+}
+.calculator-controls .form-group { margin-bottom: 30px; }
+.calculator-controls label { font-weight: bold; color: var(--dark-color); display: block; margin-bottom: 15px; }
+.slider-container { display: flex; align-items: center; gap: 20px; }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: #ddd; border-radius: 5px; outline: none; opacity: 0.7; transition: opacity .2s; }
+input[type="range"]:hover { opacity: 1; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; background: var(--primary-color); border-radius: 50%; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
+input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; background: var(--primary-color); border-radius: 50%; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 5px rgba(0,0,0,0.2); }
+#bill-output { font-size: 20px; font-weight: bold; color: var(--primary-color); background-color: #fff; padding: 5px 15px; border-radius: 5px; min-width: 70px; text-align: center; }
+.radio-group { display: flex; gap: 15px; }
+.radio-group input[type="radio"] { display: none; }
+.radio-group label { padding: 10px 20px; border: 2px solid var(--border-color); border-radius: 50px; cursor: pointer; transition: all 0.3s ease; }
+.radio-group input[type="radio"]:checked + label { background-color: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+.calculator-results { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border-color); text-align: center; }
+.savings-amount { font-size: 48px; font-weight: 700; color: var(--primary-color); margin: 10px 0; }
+.results-note { font-size: 14px; max-width: 400px; margin: 0 auto 30px auto; }
+
 /* --- MEDIA QUERIES PER LA RESPONSIVITÀ MOBILE --- */
 @media (max-width: 768px) {
     /* --- Header e Navigazione Mobile --- */
-    .main-nav {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        height: 100vh;
-        background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: right 0.5s ease-in-out;
-    }
-    .main-nav.nav-active {
-        right: 0;
-    }
-    .main-nav ul {
-        flex-direction: column;
-        gap: 30px;
-        text-align: center;
-    }
-    .main-nav li {
-        margin-left: 0;
-    }
-    .hamburger-menu {
-        display: block;
-        width: 30px;
-        height: 22px;
-        position: relative;
-    }
-    .hamburger-menu span {
-        display: block;
-        width: 100%;
-        height: 3px;
-        background-color: var(--dark-color);
-        position: absolute;
-        left: 0;
-        transition: all 0.3s;
-    }
+    .main-nav { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; transition: right 0.5s ease-in-out; }
+    .main-nav.nav-active { right: 0; }
+    .main-nav ul { flex-direction: column; gap: 30px; text-align: center; }
+    .main-nav li { margin-left: 0; }
+    .hamburger-menu { display: block; width: 30px; height: 22px; position: relative; }
+    .hamburger-menu span { display: block; width: 100%; height: 3px; background-color: var(--dark-color); position: absolute; left: 0; transition: all 0.3s; }
     .hamburger-menu span:nth-child(1) { top: 0; }
     .hamburger-menu span:nth-child(2) { top: 9px; }
     .hamburger-menu span:nth-child(3) { bottom: 0; }
@@ -338,9 +306,7 @@ h1, h2, h3 {
     .section-title { font-size: 28px; }
     
     /* --- FIX IMMAGINE CHI SIAMO --- */
-    .about-section-container {
-        flex-direction: column-reverse;
-    }
+    .about-section-container { flex-direction: column-reverse; }
 
     /* --- Timeline (Il Nostro Metodo) --- */
     .timeline::after { left: 30px; }
@@ -350,40 +316,8 @@ h1, h2, h3 {
     
     /* --- Griglia Contatti --- */
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-}
-// --- 3. GESTIONE DEL CALCOLATORE DI RISPARMIO ---
-const monthlyBillSlider = document.getElementById('monthly-bill');
-const billOutput = document.getElementById('bill-output');
-const usageTypeRadios = document.querySelectorAll('input[name="usage-type"]');
-const annualSavingsDisplay = document.getElementById('annual-savings-display');
 
-// Verifica che gli elementi esistano sulla pagina prima di aggiungere gli event listener
-if (monthlyBillSlider && billOutput && usageTypeRadios.length > 0 && annualSavingsDisplay) {
-
-    const calculateSavings = () => {
-        // 1. Leggi i valori dagli input
-        const monthlyBill = parseInt(monthlyBillSlider.value);
-        const usageType = document.querySelector('input[name="usage-type"]:checked').value;
-
-        // 2. Imposta i fattori di risparmio (questi sono stime che puoi personalizzare)
-        // Se l'utente ha anche gas, il potenziale di risparmio è maggiore 
-        // perché si può installare una pompa di calore oltre al fotovoltaico.
-        const savingsFactor = usageType === 'gas' ? 0.90 : 0.85; // 90% di risparmio con gas, 85% solo elettrico
-
-        // 3. Calcola il risparmio annuale
-        const annualBill = monthlyBill * 12;
-        const annualSavings = annualBill * savingsFactor;
-
-        // 4. Aggiorna l'interfaccia
-        billOutput.textContent = `€ ${monthlyBill}`;
-        // Formatta il numero con un separatore per le migliaia per renderlo più leggibile
-        annualSavingsDisplay.textContent = `€ ${Math.round(annualSavings).toLocaleString('it-IT')}`;
-    };
-
-    // Aggiungi gli event listener per aggiornare i calcoli in tempo reale
-    monthlyBillSlider.addEventListener('input', calculateSavings);
-    usageTypeRadios.forEach(radio => radio.addEventListener('change', calculateSavings));
-
-    // Esegui il calcolo una volta al caricamento della pagina per mostrare i valori di default
-    calculateSavings();
+    /* --- Calcolatore Risparmio su Mobile --- */
+    .savings-calculator { padding: 25px; }
+    .slider-container { flex-direction: column; gap: 10px; align-items: stretch; }
 }
