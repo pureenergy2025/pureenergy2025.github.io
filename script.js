@@ -44,3 +44,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+// --- 4. ANIMAZIONE LETTERE TITOLO HOME ---
+document.querySelectorAll('.animate-letters').forEach(textElement => {
+    const text = textElement.textContent;
+    textElement.innerHTML = ''; // Svuota l'elemento
+    text.split('').forEach((char, index) => {
+        const span = document.createElement('span');
+        span.className = 'letter-mask';
+        
+        const innerSpan = document.createElement('span');
+        innerSpan.className = 'letter';
+        innerSpan.textContent = char === ' ' ? '\u00A0' : char; // Usa un non-breaking space per gli spazi
+        innerSpan.style.transitionDelay = `${index * 50}ms`; // Applica il ritardo a cascata
+        
+        span.appendChild(innerSpan);
+        textElement.appendChild(span);
+    });
+});
