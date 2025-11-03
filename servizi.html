@@ -64,6 +64,50 @@
                 </div>
             </div>
         </section>
+        <!-- ========== SEZIONE CALCOLATORE RISPARMIO ========== -->
+<section class="section">
+    <div class="container">
+        <div class="savings-calculator animate-on-scroll">
+            <div class="calculator-intro">
+                <h2 class="section-title">Scopri il Tuo Risparmio</h2>
+                <p class="section-subtitle">Usa il nostro simulatore per ottenere una stima immediata di quanto potresti risparmiare ogni anno con le nostre soluzioni energetiche.</p>
+            </div>
+
+            <div class="calculator-controls">
+                <!-- Controllo 1: Spesa Mensile -->
+                <div class="form-group">
+                    <label for="monthly-bill">La tua spesa energetica mensile attuale:</label>
+                    <div class="slider-container">
+                        <input type="range" id="monthly-bill" min="50" max="500" value="150" step="10">
+                        <output id="bill-output">€ 150</output>
+                    </div>
+                </div>
+
+                <!-- Controllo 2: Tipo di Utenza -->
+                <div class="form-group">
+                    <label>Le tue utenze principali:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="electricity-only" name="usage-type" value="electric" checked>
+                        <label for="electricity-only">Solo Elettricità</label>
+                        
+                        <input type="radio" id="gas-too" name="usage-type" value="gas">
+                        <label for="gas-too">Elettricità + Gas</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Il tuo risparmio annuale stimato:</h3>
+                <div id="annual-savings-display" class="savings-amount">€ 1.530</div>
+                <p class="results-note">
+                    Installando un impianto fotovoltaico (e una pompa di calore se usi anche gas) puoi ridurre i tuoi costi energetici fino al 90%.
+                </p>
+                <a href="contatti.html" class="cta-button">Richiedi un Preventivo Dettagliato</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========== FINE SEZIONE CALCOLATORE RISPARMIO ========== -->
     </main>
 
 <script src="script.js"></script>
