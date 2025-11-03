@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Il Nostro Metodo - Pure Energy</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Aggiunta per gestire il ritardo delle animazioni */
+        .animate-on-scroll {
+            transition-delay: var(--delay, 0s);
+        }
+        
+        /* Assicura che l'animazione della linea parta con JS */
+        .timeline.is-visible::after {
+            animation: growLine 2s ease-out forwards;
+        }
+        
+        .timeline-item.is-visible::after {
+            animation: popIn 0.5s ease-out forwards;
+        }
+    </style>
 </head>
 <body>
 
@@ -26,41 +41,49 @@
     <main>
         <section class="section">
             <div class="container">
-                <h1 class="section-title">Il Nostro Metodo: Il Tuo Progetto, Senza Pensieri</h1>
-                <p class="section-subtitle">Abbiamo sviluppato un processo di lavoro collaudato che garantisce la massima efficienza e tranquillità in ogni fase del progetto.</p>
+                <div class="animate-on-scroll">
+                    <h1 class="section-title">Il Nostro Metodo: Il Tuo Progetto, Senza Pensieri</h1>
+                    <p class="section-subtitle">Abbiamo sviluppato un processo di lavoro collaudato che garantisce la massima efficienza e tranquillità in ogni fase del progetto.</p>
+                </div>
                 
-                <div class="timeline">
-                    <div class="timeline-item left" style="animation-delay: 0.2s;">
+                <div class="timeline animate-on-scroll">
+                    <!-- Passaggio 1 -->
+                    <div class="timeline-item left animate-on-scroll" style="--delay: 0.2s;">
                         <div class="timeline-content">
                             <h3>1. Consulenza e Sopralluogo</h3>
                             <p>Ascoltiamo le tue esigenze e un nostro tecnico effettua un sopralluogo dettagliato per valutare la fattibilità.</p>
                         </div>
                     </div>
-                    <div class="timeline-item right" style="animation-delay: 0.4s;">
+                    <!-- Passaggio 2 -->
+                    <div class="timeline-item right animate-on-scroll" style="--delay: 0.4s;">
                         <div class="timeline-content">
                             <h3>2. Progettazione Personalizzata</h3>
                             <p>Il nostro ufficio tecnico progetta la soluzione ottimale per te, massimizzando la resa e fornendoti un preventivo chiaro.</p>
                         </div>
                     </div>
-                    <div class="timeline-item left" style="animation-delay: 0.6s;">
+                    <!-- Passaggio 3 -->
+                    <div class="timeline-item left animate-on-scroll" style="--delay: 0.6s;">
                         <div class="timeline-content">
                             <h3>3. Gestione Burocratica Completa</h3>
                             <p>Non dovrai preoccuparti di nulla. Gestiamo noi tutte le pratiche per autorizzazioni e incentivi fiscali.</p>
                         </div>
                     </div>
-                    <div class="timeline-item right" style="animation-delay: 0.8s;">
+                    <!-- Passaggio 4 -->
+                    <div class="timeline-item right animate-on-scroll" style="--delay: 0.8s;">
                         <div class="timeline-content">
                             <h3>4. Installazione a Regola d'Arte</h3>
                             <p>I nostri installatori qualificati eseguono il lavoro in modo rapido, pulito e sicuro, nel pieno rispetto delle normative.</p>
                         </div>
                     </div>
-                     <div class="timeline-item left" style="animation-delay: 1s;">
+                    <!-- Passaggio 5 -->
+                     <div class="timeline-item left animate-on-scroll" style="--delay: 1.0s;">
                         <div class="timeline-content">
                             <h3>5. Collaudo e Attivazione</h3>
                             <p>Verifichiamo il perfetto funzionamento e attiviamo il tuo nuovo impianto, spiegandoti come monitorare la produzione.</p>
                         </div>
                     </div>
-                    <div class="timeline-item right" style="animation-delay: 1.2s;">
+                    <!-- Passaggio 6 -->
+                    <div class="timeline-item right animate-on-scroll" style="--delay: 1.2s;">
                         <div class="timeline-content">
                             <h3>6. Assistenza Post-Vendita</h3>
                             <p>Restiamo a tua disposizione per manutenzione, monitoraggio e qualsiasi necessità futura. Il nostro supporto non finisce mai.</p>
@@ -68,12 +91,13 @@
                     </div>
                 </div>
 
-                <div style="text-align: center; margin-top: 60px;">
+                <div style="text-align: center; margin-top: 60px;" class="animate-on-scroll" style="--delay: 1.4s;">
                      <a href="contatti.html" class="cta-button">AFFIDATI AI NOSTRI ESPERTI</a>
                 </div>
             </div>
         </section>
     </main>
-<script src="script.js"></script>
+    
+    <script src="script.js"></script>
 </body>
 </html>
