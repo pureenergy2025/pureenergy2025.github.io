@@ -36,11 +36,23 @@ h1, h2, h3 {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition-delay: var(--delay, 0s);
 }
 
 .animate-on-scroll.is-visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* --- HEADER E NAVIGAZIONE --- */
@@ -109,7 +121,7 @@ h1, h2, h3 {
 }
 
 .hamburger-menu {
-    display: none; /* Nascosto su desktop */
+    display: none;
     cursor: pointer;
     z-index: 10;
 }
@@ -138,7 +150,7 @@ h1, h2, h3 {
 /* --- SEZIONI GENERICHE --- */
 .section {
     padding: 100px 0;
-    overflow-x: hidden; /* Previene barre di scorrimento orizzontali indesiderate */
+    overflow-x: hidden;
 }
 
 .section-title {
@@ -170,11 +182,6 @@ h1, h2, h3 {
 
 .hero-content {
     max-width: 800px;
-    opacity: 0; /* Animazione gestita da JS */
-}
-
-.hero-content.is-visible {
-    animation: fadeInUp 1s ease-out forwards; /* Usa animazione a keyframe per l'eroe */
 }
 
 .hero h1 {
@@ -237,11 +244,31 @@ h1, h2, h3 {
 
 /* --- TIMELINE (IL NOSTRO METODO) --- */
 .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+
+.timeline.is-visible::after {
+    animation: growLine 2s ease-out forwards;
+}
+
+@keyframes growLine {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
 .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--primary-color); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
 .timeline-item { padding: 10px 40px; position: relative; width: 50%; }
 .timeline-item.left { left: 0; }
 .timeline-item.right { left: 50%; }
 .timeline-item::after { content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background-color: #fff; border: 4px solid var(--primary-color); top: 25px; border-radius: 50%; z-index: 1; }
+
+.timeline-item.is-visible::after {
+    animation: popIn 0.5s ease-out forwards;
+}
+
+@keyframes popIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
 .timeline-item.right::after { left: -10px; }
 .timeline-content { padding: 20px 30px; background-color: var(--light-color); border-radius: 8px; }
 
@@ -258,7 +285,7 @@ h1, h2, h3 {
     .main-nav {
         position: fixed;
         top: 0;
-        right: -100%; /* Parte da fuori schermo */
+        right: -100%;
         width: 70%;
         height: 100vh;
         background-color: rgba(255, 255, 255, 0.95);
@@ -269,7 +296,7 @@ h1, h2, h3 {
         transition: right 0.5s ease-in-out;
     }
     .main-nav.nav-active {
-        right: 0; /* Entra in scena */
+        right: 0;
     }
     .main-nav ul {
         flex-direction: column;
@@ -312,7 +339,7 @@ h1, h2, h3 {
     
     /* --- FIX IMMAGINE CHI SIAMO --- */
     .about-section-container {
-        flex-direction: column-reverse; /* Immagine sopra, testo sotto */
+        flex-direction: column-reverse;
     }
 
     /* --- Timeline (Il Nostro Metodo) --- */
