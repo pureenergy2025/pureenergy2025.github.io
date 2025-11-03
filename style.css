@@ -155,10 +155,9 @@ h1, h2, h3 {
 .hero {
     height: 90vh;
     background-color: #2c3e50; /* Colore di sfondo di sicurezza */
-    /* LINK DIRETTO ALL'IMMAGINE CHE HAI SCELTO */
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/9893727/pexels-photo-9893727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
     background-size: cover;
-    background-position: center; /* Mantiene l'immagine centrata */
+    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -329,4 +328,74 @@ h1, h2, h3 {
     height: 250px;
     border-radius: 8px;
     border: 0;
+}
+
+/* --- MEDIA QUERIES PER LA RESPONSIVITÀ MOBILE --- */
+@media (max-width: 768px) {
+
+    /* --- Header e Navigazione --- */
+    .nav-container {
+        flex-direction: column; /* Impila il logo sopra la navigazione */
+        gap: 15px; /* Aggiunge spazio tra logo e menu */
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Impila le voci del menu */
+        align-items: center; /* Centra le voci del menu */
+        gap: 10px;
+    }
+
+    .main-nav li {
+        margin-left: 0; /* Rimuove il margine laterale */
+    }
+
+    /* --- Sezione Eroe (Home) --- */
+    .hero {
+        height: 70vh; /* Riduci l'altezza per non occupare tutto lo schermo */
+    }
+
+    .hero h1 {
+        font-size: 36px; /* Riduci la dimensione del titolo principale */
+    }
+
+    .hero p {
+        font-size: 16px; /* Riduci la dimensione del paragrafo */
+    }
+
+    /* --- Sezioni Generiche --- */
+    .section {
+        padding: 60px 0; /* Riduci lo spazio sopra e sotto le sezioni */
+    }
+
+    .section-title {
+        font-size: 28px; /* Riduci la dimensione dei titoli di sezione */
+    }
+
+    /* --- Timeline (Il Nostro Metodo) --- */
+    .timeline::after {
+        left: 30px; /* Sposta la linea della timeline tutta a sinistra */
+    }
+
+    .timeline-item {
+        width: 100%; /* Ogni elemento della timeline occupa tutta la larghezza */
+        padding-left: 70px;
+        padding-right: 20px;
+    }
+    
+    .timeline-item.left, .timeline-item.right {
+        left: 0; /* Allinea tutti gli elementi a sinistra */
+    }
+
+    .timeline-item.right::after {
+        left: 20px; /* Allinea il pallino a sinistra, sulla linea */
+    }
+    .timeline-item.left::after {
+        left: 20px;
+    }
+    
+    /* --- Griglia Contatti --- */
+    .contact-grid {
+        grid-template-columns: 1fr; /* Impila il form sopra le info di contatto */
+        gap: 40px;
+    }
 }
