@@ -351,3 +351,39 @@ h1, h2, h3 {
     /* --- Griglia Contatti --- */
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
 }
+// --- 3. GESTIONE DEL CALCOLATORE DI RISPARMIO ---
+const monthlyBillSlider = document.getElementById('monthly-bill');
+const billOutput = document.getElementById('bill-output');
+const usageTypeRadios = document.querySelectorAll('input[name="usage-type"]');
+const annualSavingsDisplay = document.getElementById('annual-savings-display');
+
+// Verifica che gli elementi esistano sulla pagina prima di aggiungere gli event listener
+if (monthlyBillSlider && billOutput && usageTypeRadios.length > 0 && annualSavingsDisplay) {
+
+    const calculateSavings = () => {
+        // 1. Leggi i valori dagli input
+        const monthlyBill = parseInt(monthlyBillSlider.value);
+        const usageType = document.querySelector('input[name="usage-type"]:checked').value;
+
+        // 2. Imposta i fattori di risparmio (questi sono stime che puoi personalizzare)
+        // Se l'utente ha anche gas, il potenziale di risparmio è maggiore 
+        // perché si può installare una pompa di calore oltre al fotovoltaico.
+        const savingsFactor = usageType === 'gas' ? 0.90 : 0.85; // 90% di risparmio con gas, 85% solo elettrico
+
+        // 3. Calcola il risparmio annuale
+        const annualBill = monthlyBill * 12;
+        const annualSavings = annualBill * savingsFactor;
+
+        // 4. Aggiorna l'interfaccia
+        billOutput.textContent = `€ ${monthlyBill}`;
+        // Formatta il numero con un separatore per le migliaia per renderlo più leggibile
+        annualSavingsDisplay.textContent = `€ ${Math.round(annualSavings).toLocaleString('it-IT')}`;
+    };
+
+    // Aggiungi gli event listener per aggiornare i calcoli in tempo reale
+    monthlyBillSlider.addEventListener('input', calculateSavings);
+    usageTypeRadios.forEach(radio => radio.addEventListener('change', calculateSavings));
+
+    // Esegui il calcolo una volta al caricamento della pagina per mostrare i valori di default
+    calculateSavings();
+}
